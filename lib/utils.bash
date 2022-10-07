@@ -31,9 +31,8 @@ list_github_tags() {
 }
 
 list_all_versions() {
-  # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-  # Change this function if hugo has other means of determining installable versions.
-  list_github_tags
+  # NOTE: By default, asdf simply lists the tag names from GitHub releases; In hugo-asdf, we add "extended-*" for each version.
+  list_github_tags | sed 'p; s/^/extended-/'
 }
 
 download_release() {
