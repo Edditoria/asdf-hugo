@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for hugo.
+# NOTE: Ensure this is the correct GitHub homepage where releases can be downloaded for hugo.
 GH_REPO="https://github.com/gohugoio/hugo"
 TOOL_NAME="hugo"
 TOOL_TEST="hugo version"
@@ -62,7 +62,8 @@ install_version() {
 
   (
     mkdir -p "$install_path"
-    cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+    # NOTE: Modified `cp` command: No `-r` and only copy the `hugo` binary.
+    cp "$ASDF_DOWNLOAD_PATH"/hugo "$install_path"
 
     # TODO: Assert hugo executable exists.
     local tool_cmd
