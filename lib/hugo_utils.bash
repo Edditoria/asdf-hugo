@@ -7,9 +7,9 @@ get_kernel() {
   local uname_kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
   case "$uname_kernel" in
-    'linux'|'darwin'|'dragonfly'|'freebsd'|'netbsd'|'openbsd')
+    'linux' | 'darwin' | 'dragonfly' | 'freebsd' | 'netbsd' | 'openbsd')
       kernel="$uname_kernel"
-    ;;
+      ;;
   esac
 
   echo "$kernel"
@@ -19,18 +19,18 @@ get_arch() {
   local arch='unsupported_arch'
   local uname_arch="$(uname -m | tr '[:upper:]' '[:lower:]')"
   case "$uname_arch" in
-    'amd64'|'x86_64'|'i686-64'|'k1om')
+    'amd64' | 'x86_64' | 'i686-64' | 'k1om')
       arch='amd64'
-    ;;
-    '386'|'i686'|'i386'|'x86')
+      ;;
+    '386' | 'i686' | 'i386' | 'x86')
       arch='386'
-    ;;
-    'arm64'|'aarch64')
+      ;;
+    'arm64' | 'aarch64')
       arch='arm64'
-    ;;
-    'arm'|'armv7l'|'armv6l')
+      ;;
+    'arm' | 'armv7l' | 'armv6l')
       arch='arm'
-    ;;
+      ;;
   esac
 
   echo "$arch"
@@ -46,7 +46,7 @@ create_release_url() {
   local file_version="${version/#extended-/extended_}"
 
   local kernel="$(get_kernel)" # aka the GOOS.
-  local arch="$(get_arch)" # aka the GOARCH.
+  local arch="$(get_arch)"     # aka the GOARCH.
   if [[ "$kernel" == unsupported* ]]; then
     echo "Detected kernel \"$(uname -s)\" but not supported."
     return 1
