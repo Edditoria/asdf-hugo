@@ -7,6 +7,10 @@ GH_REPO="https://github.com/gohugoio/hugo"
 TOOL_NAME="hugo"
 TOOL_TEST="hugo version"
 
+# Import some functions for asdf-hugo.
+current_script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+source "$current_script_dir/hugo_utils.bash"
+
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
   exit 1
@@ -40,8 +44,8 @@ download_release() {
   version="$1"
   filename="$2"
 
-  # TODO: Adapt the release URL convention for hugo
-  url="$GH_REPO/archive/v${version}.tar.gz"
+  # NOTE: Adapted the release URL convention for hugo
+  url=$(create_release_url "$GH_REPO" "$version")
 
   echo "* Downloading $TOOL_NAME release $version..."
   curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
