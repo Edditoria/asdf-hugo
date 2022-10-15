@@ -45,10 +45,10 @@ download_release() {
   filename="$2"
 
   # NOTE: Adapted the release URL convention for hugo
-  url=$(create_release_url "$GH_REPO" "$version")
+  url=$(create_release_url "$GH_REPO" "$version") || fail "Could not download: $url"
 
   echo "* Downloading $TOOL_NAME release $version..."
-  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+  curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download: $url"
 }
 
 install_version() {

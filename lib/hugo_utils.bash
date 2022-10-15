@@ -43,8 +43,8 @@ create_release_url() {
 
   local current_script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
   local release_version="${version#extended-}" # Example: 0.104.3
-  local kernel="$(get_kernel)" # aka the GOOS.
-  local arch="$(get_arch)"     # aka the GOARCH.
+  local kernel="$(get_kernel)"                 # aka the GOOS.
+  local arch="$(get_arch)"                     # aka the GOARCH.
 
   if [[ "$kernel" == unsupported* ]]; then
     echo "Detected kernel \"$(uname -s)\" but not supported."
