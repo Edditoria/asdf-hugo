@@ -65,7 +65,7 @@ install_version() {
     # NOTE: Modified `cp` command: No `-r` and only copy the `hugo` binary.
     cp "$ASDF_DOWNLOAD_PATH"/hugo "$install_path"
 
-    # TODO: Assert hugo executable exists.
+    # NOTE: Asserted hugo executable exists.
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
     test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
