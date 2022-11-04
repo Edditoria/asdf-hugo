@@ -2,6 +2,20 @@
 
 # FILE: As helper of utils.bash that sources this file.
 
+parse_version() {
+  local version="$1" # Requested $version in utils.bash file. Example: "extended-0.104.3".
+  local parsed_version
+
+  if [[ "${ASDF_HUGO_INSTALL_EXTENDED:-}" = true ]]; then
+    # Users may manually input "extended-" during install.
+    parsed_version="extended-${version#extended-}"
+  else
+    parsed_version="$version"
+  fi
+
+  echo "$parsed_version"
+}
+
 get_kernel() {
   local kernel='unsupported_kernel'
   local uname_kernel="$(uname -s | tr '[:upper:]' '[:lower:]')"
@@ -36,10 +50,12 @@ get_arch() {
   echo "$arch"
 }
 
+# Param $1 as local gh_repo. The $GH_REPO in utils.bash file.
+# Param $2 as local version. Requested $version in utils.bash file. Example: "extended-0.104.3".
 # Returns {string} Example: "https://github.com/gohugoio/hugo/releases/download/v0.104.3/hugo_extended_0.104.3_darwin-universal.tar.gz".
 create_release_url() {
-  local gh_repo="$1" # $GH_REPO in utils.bash file.
-  local version="$2" # Requested $version in utils.bash file. Example: "extended-0.104.3".
+  local gh_repo="$1"
+  local version="$(parse_version "$2")"
 
   local current_script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
   local release_version="${version#extended-}" # Example: 0.104.3

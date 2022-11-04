@@ -12,17 +12,19 @@
 
 - [Why](#why)
 - [Install](#install)
+- [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Why
 
-I created this project to help maintaining some super-old Hugo sites. Sometimes I cannot change the development environment on behalf of other people/parties. Sometimes I want to quickly install the latest extended-Hugo that just works.
+I created this project for maintenance of some old Hugo sites. Sometimes I cannot change the development environment on behalf of other people/parties. Sometimes I want to quickly install the latest extended-Hugo that just works.
 
 The project supports:
 
-- Separated "normal" and **Sass/SCSS extended** versions for your projects/clients.
-- Work from latest to legacy versions.
+- Separated "normal" and **Sass/SCSS extended** versions for different projects/clients.
+- Work from latest to legacy versions. It just works.
+- Work with others. Install extended version without `extended-` in `.tool-versions` file.
 
 ## Install
 
@@ -72,6 +74,16 @@ asdf uninstall hugo extended-104.0.1
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to install & manage versions.
+
+## Configuration
+
+Your teammates may use other asdf-hugo plugins that don't aware of `extended-*`. You can force to install extended version in your machine. Put this line in your shell config file, for example, `.bashrc`:
+
+```shell
+export ASDF_HUGO_INSTALL_EXTENDED=true
+```
+
+From now on, all new installations will support Sass/SCSS. Please be noted that _the path of the binaries will not contain "extended-"_.
 
 ## Contributing
 
