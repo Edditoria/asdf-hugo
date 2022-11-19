@@ -87,10 +87,12 @@ From now on, all new installations will support Sass/SCSS. Please be noted that 
 
 ## Contributing
 
-Contributions of any kind welcome! See the [contributing guide](contributing.md).
+Contributions of any kind welcome! See the [contributing guide](contributing.md). [Thanks goes to these contributors](https://github.com/Edditoria/asdf-hugo/graphs/contributors)!
 
-[Thanks goes to these contributors](https://github.com/Edditoria/asdf-hugo/graphs/contributors)!
+The CSV file (hugo_release.csv), that is used to resolve the URL of release file in Hugo repository, is created in another repo "[Edditoria/hugo-release-watcher](https://github.com/Edditoria/hugo-release-watcher)". You may want to take a look when you want to develop or fix a bug.
 
-## License
+## Copyright and License
 
-See [LICENSE](LICENSE) © [Edditoria](https://github.com/Edditoria/)
+Copyright (c) Edditoria. All rights reserved. Code released under the [MIT License](LICENSE). Docs released under [Creative Commons](https://creativecommons.org/licenses/by/4.0/).
+
+You can use it, share it, modify the code and distribute your work for private and commercial uses. If you like, please share your work with me. :pizza:
