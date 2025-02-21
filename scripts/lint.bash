@@ -5,5 +5,7 @@ shellcheck --shell=bash --external-sources \
 	lib/* \
 	scripts/*
 
+# TODO: Already set switch_case_indent in editorconfig.
 shfmt --language-dialect bash --diff \
+	--case-indent \
 	./**/*
