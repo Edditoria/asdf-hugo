@@ -9,6 +9,7 @@ TOOL_TEST="hugo version"
 
 # Import some functions for asdf-hugo.
 current_script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+# shellcheck source=./lib/hugo_utils.bash
 source "$current_script_dir/hugo_utils.bash"
 
 fail() {
