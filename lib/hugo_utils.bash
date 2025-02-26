@@ -2,6 +2,43 @@
 
 # FILE: As helper of utils.bash that sources this file.
 
+# Identify Hugo edition in a string, then reformat for further process.
+# Example: `asdf latest hugo ex-0.103` → "extended-0.103".
+# @arg $1 string As local query.
+# @stdout "$edition$release".
+#   Edition can be "extended-" or empty.
+#   Release is just remaining part of the argument, or empty.
+format_query() {
+	local query="$1"
+
+	if [[ "$query" == '[0-9]' ]]; then
+		# printf "Default in cli. i.e. No user input.\n" >&2
+		echo ""
+		return # early.
+	fi
+
+	local edition release
+
+	if [[ "$query" =~ ^e(x(t(e(n(d(e(d)?)?)?)?)?)?)(-(.*))?$ ]]; then
+		# printf "Case matched: ex(tended) or ex(tended)-something\n" >&2
+		release="${BASH_REMATCH[9]}"
+		if [[ -z "$release" ]]; then
+			edition='extended'
+		else
+			edition='extended-'
+		fi
+		# for i in "${!BASH_REMATCH[@]}"; do
+		# 	printf "BASH_REMATCH[%s] : %s\n" "$i" "${BASH_REMATCH[$i]}" >&2
+		# done
+		# printf "Query edition=\"%s\" release=\"%s\"\n" "$edition" "$release" >&2
+		echo "${edition}${release}"
+		return # early.
+	fi
+
+	# printf "Query edition=\"\" release=\"%s\"\n" "$query" >&2
+	echo "$query"
+}
+
 parse_version() {
 	local version="$1" # Requested $version in utils.bash file. Example: "extended-0.104.3".
 	local parsed_version

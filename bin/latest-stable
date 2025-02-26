@@ -35,4 +35,37 @@ asdf_latest_stable() {
 	printf "%s\n" "$version"
 }
 
-asdf_latest_stable
+query="$1"
+
+# Cli `asdf latest hugo` and similar.
+# Use `asdf_latest_stable`.
+if [[ "$query" == '[0-9]' ]]; then
+	asdf_latest_stable
+	exit # early.
+fi
+
+formatted_query="$(format_query "$query")"
+edition=
+version=
+
+# Cli `latest:ex` and similar.
+# Use `asdf_latest_stable`.
+if [[ "$formatted_query" == 'extended' ]]; then
+	version="$(asdf_latest_stable)"
+	printf "%s-%s\n" "$formatted_query" "$version"
+	exit # early.
+fi
+
+# Cli `latest:ex-0.100` and similar.
+# Use last version in search result.
+if [[ "$formatted_query" == 'extended-'* ]]; then
+	edition='extended-'
+	version="${formatted_query#extended-}"
+else
+	edition=''
+	version="$formatted_query"
+fi
+
+# Use last version in search result.
+version="$(list_all_versions | grep "^$version" | sort_versions | tail -n1 | xargs echo)"
+printf "%s%s\n" "$edition" "$version"
